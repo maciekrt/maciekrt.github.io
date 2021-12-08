@@ -8,7 +8,8 @@
 layout: page
 ---
 
-# About me
-
 I am a mathematician and a data scientist currently working in Huawei Ireland Research Center. Before I was a postdoc in algebraic geometry in Universiteit van Amsterdam and École polytechnique fédérale de Lausanne.
 
+Graphically, I was doing a little bit of this:
+![math reasoning :)](/assets/argument.png)
+and now I do a little bit of that:
