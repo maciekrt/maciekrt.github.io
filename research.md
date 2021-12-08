@@ -32,4 +32,8 @@ with Zsolt Patakfalvi, in *Mathematische Annalen*, Volume 380, pages 1767–1799
 1. \[[arXiv](https://arxiv.org/abs/2102.02788)\]
 **On the Beauville--Bogomolov decomposition in characteristic $$p \geq 0$$**, with Zsolt Patakfalvi, submitted.
 
-### Old Cryptography stuff
+## Old Cryptography stuff
+
+1. \[[published](https://www.sciencedirect.com/science/article/abs/pii/S002001901830036X)\] **Quasi-chainrule for min-entropy**, with Stefan Dziembowski and Tomasz Kazana, in *Information Processing Letters 134 (2018)*
+2. \[[published](https://link.springer.com/chapter/10.1007/978-3-319-54705-3_17)\] **Bounded-retrieval model with keys derived from private data**, with K. Durnoga, S. Dziembowski, T. Kazana and M. Zając, in Inscrypt 2016 - Information Security and Cryptology 
+3. \[[published](https://link.springer.com/chapter/10.1007%2F978-3-319-06734-6_19)\] **Position-Based Cryptography from the Noisy Channels** with Stefan Dziembowski, in *Progress in Cryptology -- Africacrypt 2014*
