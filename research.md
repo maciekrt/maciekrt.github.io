@@ -8,8 +8,6 @@ Here's a list of my math and old cryptography papers.
 
 ## Mathematics
 
-Here's a list of paper.
-
 ### Published
 1. \[[arXiv](https://arxiv.org/abs/1603.05104), [published](https://doi.org/10.1093/imrn/rnw297)\]
 **Liftability of singularities and their Frobenius morphism mod $$p^2$$** in *International Mathematics Research Notices*, Volume 2018, Issue 14, July 2018, pages 4513–4577.
@@ -27,7 +25,7 @@ with Zsolt Patakfalvi, in *Mathematische Annalen*, Volume 380, pages 1767–1799
 7. \[[arXiv](https://arxiv.org/abs/2102.02788)\]
 **Global Frobenius Liftability II**, with Piotr Achinger and Jakub Witaszek, to appear in *Annali della Scuola Normale Superiore di Pisa, Classe di Scienze*.
 
-### Preprint
+### Gorgeous preprint - still refereed
 
 1. \[[arXiv](https://arxiv.org/abs/2102.02788)\]
 **On the Beauville--Bogomolov decomposition in characteristic $$p \geq 0$$**, with Zsolt Patakfalvi, submitted.
