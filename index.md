@@ -20,7 +20,7 @@ and now I do a little bit of that:
 
 Along the way, I also had quite a bit of fun with:
  
-[![covid](/assets/reproduction-rate.png)](https://rteu.live/)
+[![covid](/assets/reproduction-rate.png)](https://rteu.live/retired)
 
 and 
 
