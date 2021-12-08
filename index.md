@@ -6,5 +6,9 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 #
 layout: page
-title: About
 ---
+
+# About me
+
+I am a mathematician and a data scientist currently working in Huawei Ireland Research Center. Before I was a postdoc in algebraic geometry in Universiteit van Amsterdam and École polytechnique fédérale de Lausanne.
+
