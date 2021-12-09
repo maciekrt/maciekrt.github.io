@@ -10,7 +10,7 @@ layout: page
 ---
 I am a mathematician and a data scientist currently working in Huawei Ireland Research Center. Before I was a postdoc in algebraic geometry in Universiteit van Amsterdam and École polytechnique fédérale de Lausanne. Along the way, I fostered quite a bit of interest in AI and math modelling. Even earlier, I did a PhD in mathematics in University of Warsaw. 
 
-Presenting my life journey graphically (some pictures even link to some of my work -- feel free to talk a look:), I was doing a little bit of this:
+Presenting my life journey graphically (some pictures even link to some of my work -- feel free to take a look:), I was doing a little bit of this:
 
 [![math reasoning](/assets/argument.png)](https://arxiv.org/search/math?searchtype=author&query=Zdanowicz%2C+M)
 
@@ -25,3 +25,5 @@ Along the way, I also had quite a bit of fun with:
 and 
 
 [![medical vision](/assets/medical-vision.png)](https://github.com/maciekrt/membrane-hub)
+
+Let's see what's there ahead of me.
