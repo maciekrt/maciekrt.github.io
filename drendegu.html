@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Kalkulator Leśnego Doktora Endugu</title>
+</head>
+<body>
+<script src="html2pdf.bundle.min.js"></script>
+<script> 
+    // Arrow function ( https://stackoverflow.com/questions/808826/draw-arrow-on-canvas-tag )
+    function canvas_arrow(context, fromx, fromy, tox, toy) {
+        var headlen = 10; // length of head in pixels
+        var dx = tox - fromx;
+        var dy = toy - fromy;
+        var angle = Math.atan2(dy, dx);
+        context.moveTo(fromx, fromy);
+        context.lineTo(tox, toy);
+        context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), 
+            toy - headlen * Math.sin(angle - Math.PI / 6));
+        context.moveTo(tox, toy);
+        context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), 
+            toy - headlen * Math.sin(angle + Math.PI / 6));
+    }
+
+    // Main drawing function
+    function draw() {
+        // SIZE
+        SIZE = 250
+        // Parsing data from forms
+        var H = parseInt(document.getElementById("Hval").value);
+        var b = parseInt(document.getElementById("bval").value);
+        var a = parseInt(document.getElementById("aval").value);
+        var W = parseInt(document.getElementById("Wval").value);
+
+        if(isNaN(H) || isNaN(a) || isNaN(b)) { 
+            document.getElementById("errorMessage").innerHTML = "Jedna z wartości nie została podana!"
+            return
+        }
+        if(b < H) {
+            document.getElementById("errorMessage").innerHTML = "Wartość b musi być większa niż H!"
+            return
+        } 
+        document.getElementById("errorMessage").innerHTML = ""
+
+        var factor = SIZE/H
+        var aa = Math.sqrt(b*b - H*H)
+        var h = a*H/b
+        var bb = Math.sqrt(a*a - h*h)
+        var shift = bb*H/b
+        var shift2 = bb*aa/b
+
+        // Compute values
+        var angle = Math.acos(bb/a)*180.0/Math.PI
+        var angle2 = 180.0 - angle
+        var perimeterRect = 2*(h+b+bb)
+        var perimeterRectM = perimeterRect/1000
+        var perimeterParallel = 2*(a+b)
+        var perimeterParallelM = perimeterParallel/1000
+        var surface = (Math.floor(b+bb)*Math.floor(h)/1000000)
+        var surfaceParallel = (Math.floor(b)*Math.floor(h)/1000000)
+        var mass = 2.5*surface*W
+        var massParallel = 2.5*surfaceParallel*W
+
+        // Lengths on the drawing
+        var dH = SIZE
+        var da = Math.floor(a*factor)
+        var db = Math.floor(b*factor)
+        var dbb = Math.floor(bb*factor)
+        var dshift = Math.floor(shift*factor)
+        var daa = Math.floor(aa*factor)
+        var dshift2 = Math.floor(shift2*factor)
+        var sx = 50+dshift
+        var sy = 100
+        
+        // Drawing
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        canvas.height = 2*sy + da + daa
+        canvas.width = 100 + 2*dshift + dH
+        ctx.beginPath()
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#6600cc';
+        ctx.moveTo(sx,sy);
+        ctx.lineTo(sx,sy+da);
+        ctx.lineTo(sx+dH,sy+da+daa);
+        ctx.lineTo(sx+dH,sy+daa)
+        ctx.lineTo(sx,sy)
+        ctx.stroke();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000000';
+        ctx.lineTo(sx+dH,sy)
+        ctx.lineTo(sx+dH,sy+daa)
+        ctx.lineTo(sx+dH+dshift,sy+daa+dshift2)
+        ctx.lineTo(sx+dH,sy+daa+da)
+        ctx.moveTo(sx,sy+da)
+        ctx.lineTo(sx-dshift,sy+da-dshift2)
+        ctx.lineTo(sx,sy)
+        canvas_arrow(ctx, sx-40, sy-50, sx+10, sy+20);
+        canvas_arrow(ctx, sx + dH + 45, sy + daa - 48, sx + dH - 12,sy + daa + 7)
+        // Labels
+        ctx.font = "12px Garamond";
+        ctx.fillText("a = " + a + "mm" ,
+            sx + 10, sy + da/2);
+        ctx.fillText("H = " + H + "mm" ,
+            sx + dH/2, sy - 10);
+        ctx.fillText("b = " + b + "mm" ,
+            sx + dH/2, sy + daa/2 - 10);
+        ctx.fillText("b' = " + Math.floor(bb)+"mm",
+            sx + dH + dshift/2,sy + daa + dshift2/2 - 10)
+        ctx.fillText("h = " + Math.floor(h)+"mm",
+            sx + dH + dshift/2 + 10,sy + daa + (da + dshift2)/2 + 10)
+        ctx.fillText("b+b'= " + Math.floor(b+bb)+"mm", 
+            (dshift + dH)/2,sy + da + (daa - dshift2)/2 + 30) 
+        ctx.fillText(angle.toFixed(3) + " stopni",sx-55, sy-55);
+        ctx.fillText(angle2.toFixed(3) + " stopni",sx + dH + 30, sy + daa - 52); 
+        ctx.stroke();
+
+        // Presenting other data
+        document.getElementById("contentSurface").innerHTML = "Powierzchnia: " + surface.toFixed(2) + "m2";
+        document.getElementById("contentPerimeterRect").innerHTML = "Obwód prostokąta: " + perimeterRectM.toFixed(2) + "m / " + Math.floor(perimeterRect) + "mm";
+        document.getElementById("contentPerimeterParallel").innerHTML = "Obwód równoległoboku: " + perimeterParallelM.toFixed(2) + "m / " + Math.floor(perimeterParallel) + "mm";
+        document.getElementById("contentMassRect").innerHTML = "Masa szyby prostokątnej: " + mass.toFixed(2) + "kg";
+        document.getElementById("contentMassParallel").innerHTML = "Masa szyby równoległobocznej: " + massParallel.toFixed(2) + "kg";
+    }
+
+    function computeRect() {
+        // Rectangle
+        var WRect = parseInt(document.getElementById("WvalRect").value);
+        var aRect = parseInt(document.getElementById("avalRect").value);
+        var bRect = parseInt(document.getElementById("bvalRect").value);
+
+        var surfaceRect = (Math.floor(aRect)*Math.floor(bRect)/1000000)
+        var massRect = 2.5*surfaceRect*WRect
+        var perimeterRect = 2*(aRect + bRect)
+        var perimeterRectM = perimeterRect/1000
+        // Upper rectangle
+        document.getElementById("contentPerimeterRectangle").innerHTML = "Obwód prostokąta: " + perimeterRectM.toFixed(2) + "m / " + Math.floor(perimeterRect) + "mm";
+        document.getElementById("contentMassRectangle").innerHTML = "Masa szyby: " + massRect.toFixed(2) + "kg";
+    }
+
+    function generatePDF() {
+        // Choose the element that our invoice is rendered in.
+        const element = document.getElementById("image");
+        // Choose the element and save the PDF for our user.
+        html2pdf()
+            .set({ html2canvas: { scale: 8} , filename: 'ismailSzybka.pdf' })
+            .from(element)
+            .save();
+      }
+</script>
+
+<h2>Kalkulatorek Leśnego Doktora Endugu</h2>
+
+<hr>
+Prostokąt:<br><br>
+a: <input type="text" id="avalRect" value="1000"> b: <input type="text" id="bvalRect" value="2000"> 
+Grubość (mm): <input type="text" id="WvalRect" value="4"></br>
+<br>
+<button type="button" onclick="computeRect()">Policz!</button> 
+<br>
+<p id="contentPerimeterRectangle"></p>
+<p id="contentMassRectangle"></p>
+<hr>
+
+Równoległobok: <br><br>
+
+a: <input type="text" id="aval" value="1360"> b: <input type="text" id="bval" value="2218"> H: <input type="text" id="Hval" value="1842"> 
+Grubość (mm): <input type="text" id="Wval" value="4"><br>
+
+<br>
+<button type="button" onclick="draw()">Policz i rysuj!</button> <span id="errorMessage" style="color: red;"></span>
+<br>
+<p id="contentSurface"></p>
+<p id="contentPerimeterParallel"></p>
+<p id="contentPerimeterRect"></p>
+<p id="contentMassRect"></p>
+<p id="contentMassParallel"></p>
+<button onclick="generatePDF()">Ściągnij PDF</button><span id="errorMessage2" style="color: red;"></span>
+<br><br>
+<div id="image">
+    <canvas id="myCanvas" width="800" height="800" style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+    </canvas>
+    <script>
+        draw()
+    </script>
+</div>
+
+</body>
+</html> 
